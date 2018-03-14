@@ -1,0 +1,22 @@
+<h1>Day#index</h1>
+<p>Find me in app/views/day/index.html.erb</p>
+
+
+<table class="table">
+  <thead>
+    <th>Rank</th>
+    <th>Serial</th>
+    <th>Type</th>
+    <th>Frequency</th>
+    <th>Percentage Change</th>
+  </thead>
+  <% @devices.each_with_index do |device, index| %>
+  <tr>
+    <td><%= index + 1 %></td>
+    <td><%= device[:serial] %></td>
+    <td><%= device[:category] %></td>
+    <td><%= device[:frequency] %></td>
+    <td><%= device[:change] %></td>
+  </tr>
+  <% end %>
+</table>
