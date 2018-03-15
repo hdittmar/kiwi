@@ -1,29 +1,31 @@
-<h1>Choose view</h1>
-<h2>Show popular devices</h2>
+<div class="container">
+  <h1>Choose view</h1>
+  <h2>Show popular devices</h2>
 
-<form action="/day">
-  <div class="from-group">
-    <label for="day">Choose the day</label>
-    <input type="date" name="day" class="form-control">
-  </div>
-  <input type="submit">
-</form>
+  <form action="/day">
+    <div class="from-group">
+      <label for="day">Choose the day</label>
+      <input type="date" name="day" class="form-control">
+    </div>
+    <input type="submit">
+  </form>
 
-<h2>Show specific device type and status</h2>
-<form action="/type">
-  <div class="form-group">
-    <label for="category">Choose device type</label>
-    <select name="category" id="category" class="form-control">
-      <option value="sensor">Sensor</option>
-      <option value="gateway">Gateway</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="status">Online or offline?</label>
-    <select name="status" id="status" class="form-control">
-      <option value="online">Online</option>
-      <option value="offline">Offline</option>
-    </select>
-  </div>
-  <input type="submit">
-</form>
+  <h2>Show specific device type and status</h2>
+  <form action="/type">
+    <div class="form-group">
+      <label for="category">Choose device type</label>
+      <select name="category" id="category" class="form-control">
+        <option value="sensor">Sensor</option>
+        <option value="gateway">Gateway</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="status">Online or offline?</label>
+      <select name="status" id="status" class="form-control">
+        <option value="online">Online</option>
+        <option value="offline">Offline</option>
+      </select>
+    </div>
+    <input type="submit">
+  </form>
+</div>

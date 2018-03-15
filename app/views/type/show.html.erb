@@ -1,17 +1,21 @@
-<h1>Type#show</h1>
-<p>Find me in app/views/type/show.html.erb</p>
-<table class="table">
-  <thead>
-    <th>Date</th>
-    <th>Devices</th>
-  </thead>
-  <%  for i in (1..30)  %> 
+<div class="container">
+  <h1>Type#show</h1>
+  <p>Find me in app/views/type/show.html.erb</p>
+  <table class="table">
+    <thead>
+      <th>Date</th>
+      <th>Devices</th>
+    </thead>
+    <%  for i in (1..30)  %> 
     <tr>
       <td>
-      <% date = @today - i.days %>
-      <%= date.strftime("%d\/%m\/%y") %>
+        <% date = @today - i.days %>
+        <%= date.strftime("%d\/%m\/%y") %>
       </td>
       <td><%=  @reports.where(timestamp: date.all_day).count %></td>
     </tr>
-  <% end %>
-</table>
+    <% end %>
+  </table>
+
+  <%= link_to("Return",root_path,class:"btn btn-default") %>
+</div>

@@ -1,22 +1,57 @@
-<h1>Day#index</h1>
-<p>Find me in app/views/day/index.html.erb</p>
+<div class="container">
+  <h1>Day#index</h1>
+  <p>Find me in app/views/day/index.html.erb</p>
 
 
-<table class="table">
-  <thead>
-    <th>Rank</th>
-    <th>Serial</th>
-    <th>Type</th>
-    <th>Frequency</th>
-    <th>Percentage Change</th>
-  </thead>
-  <% @devices.each_with_index do |device, index| %>
-  <tr>
-    <td><%= index + 1 %></td>
-    <td><%= device[:serial] %></td>
-    <td><%= device[:category] %></td>
-    <td><%= device[:frequency] %></td>
-    <td><%= device[:change] %></td>
-  </tr>
-  <% end %>
-</table>
+  <table class="table">
+    <thead>
+      <th>Rank</th>
+      <th>Serial</th>
+      <th>Type</th>
+      <th>Frequency</th>
+      <th>Percentage Change</th>
+    </thead>
+    <% @devices.each_with_index do |device, index| %>
+      <% if index < 10 %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= device[:serial] %></td>
+          <td><%= device[:category] %></td>
+          <td><%= device[:frequency] %></td>
+          <td><%= device[:change] %></td>
+        </tr>
+      <% else %>
+        <tr class="hidden additional">
+          <td><%= index + 1 %></td>
+          <td><%= device[:serial] %></td>
+          <td><%= device[:category] %></td>
+          <td><%= device[:frequency] %></td>
+          <td><%= device[:change] %></td>
+        </tr>
+      <% end %>
+    <% end %>
+    <% if @devices.length > 10 %>
+    <tr>
+      <td><a href="" id="show-more" class="btn btn-default">Show/Hide <%= @devices.length - 10 %> more</a> </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <% end %>
+  </table>
+
+    <%= link_to("Return",root_path,class:"btn btn-default") %>
+</div>
+
+<script type="text/javascript">
+  const hidden_elements = document.querySelectorAll(".additional");
+  if (hidden_elements.length > 0){
+    document.getElementById("show-more").addEventListener("click",(event)=>{
+    event.preventDefault();
+    hidden_elements.forEach((element)=>{
+      element.classList.toggle("hidden");
+    });
+  });
+  }
+</script>
