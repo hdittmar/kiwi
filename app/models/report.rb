@@ -3,6 +3,7 @@ require 'date'
 
 class Report < ApplicationRecord
   belongs_to :device
+  has_one :category, through: :device
 
   validates :timestamp, presence: true
   validates :status, inclusion: {in: ["online","offline"]}
