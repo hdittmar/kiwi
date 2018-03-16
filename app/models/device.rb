@@ -43,7 +43,7 @@ class Device < ApplicationRecord
       change = calculate_percentage_change(device_id, frequency, last_weeks_frequencies)
       results << {serial: device.serial, category: device.category, frequency: frequency, change: change}
     end
-    results
+    results.sort_by {|result| [-result[:frequency], -result[:change]] }
   end
 
   def self.calculate_percentage_change( device_id, frequency, last_weeks_frequencies)
