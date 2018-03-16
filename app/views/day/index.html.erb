@@ -1,6 +1,21 @@
+<style>
+.positive{
+  color:green;
+}
+.neutral{
+  color:gray;
+}
+.negative{
+  color:red;
+}
+</style>
+
 <div class="container">
-  <h1>Day#index</h1>
-  <p>Find me in app/views/day/index.html.erb</p>
+  <h1><%=  @date.strftime("%d\/%m\/%y") %></h1>
+  <p>Devices with the most occurences</p>
+  <% if @devices.length == 0 %>
+    <p>NO DEVICES TO SHOW</p>
+  <% end %>
 
 
   <table class="table">
@@ -11,6 +26,7 @@
       <th>Frequency</th>
       <th>Percentage Change</th>
     </thead>
+
     <% @devices.each_with_index do |device, index| %>
       <% if index < 10 %>
         <tr>
@@ -18,40 +34,62 @@
           <td><%= device[:serial] %></td>
           <td><%= device[:category] %></td>
           <td><%= device[:frequency] %></td>
-          <td><%= device[:change] %></td>
+
+          <% if device[:change] > 0 %>
+            <td class="positive">
+              + <%= device[:change].round(2) %>
+            </td>
+          <% elsif device[:change] == 0 %>
+            <td class="neutral">
+              <%= device[:change].round(2) %>
+            </td>
+          <% else %>
+            <td class="negative">
+              <%= device[:change].round(2) %>
+            </td>
+          <% end %>
         </tr>
-      <% else %>
+        <% else %>
+
         <tr class="hidden additional">
           <td><%= index + 1 %></td>
           <td><%= device[:serial] %></td>
           <td><%= device[:category] %></td>
           <td><%= device[:frequency] %></td>
-          <td><%= device[:change] %></td>
+
+          <% if device[:change] > 0 %>
+            <td class="positive">
+              + <%= device[:change].round(2) %>
+            </td>
+          <% elsif device[:change] == 0 %>
+            <td class="neutral">
+              <%= device[:change].round(2) %>
+            </td>
+          <% else %>
+            <td class="negative">
+              <%= device[:change].round(2) %>
+            </td>
+          <% end %>
+
         </tr>
       <% end %>
     <% end %>
-    <% if @devices.length > 10 %>
-    <tr>
-      <td><a href="" id="show-more" class="btn btn-default">Show/Hide <%= @devices.length - 10 %> more</a> </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <% end %>
-  </table>
 
-    <%= link_to("Return",root_path,class:"btn btn-default") %>
+  </table>
+  <% if @devices.length > 10 %>
+    <a href="" id="show-more" class="btn btn-default">Show/Hide <%= @devices.length - 10 %> more with frequency <%= @devices[-1][:frequency]  %></a>
+  <% end %>
+  <%= link_to("Return",root_path,class:"btn btn-default") %>
 </div>
 
 <script type="text/javascript">
   const hidden_elements = document.querySelectorAll(".additional");
   if (hidden_elements.length > 0){
     document.getElementById("show-more").addEventListener("click",(event)=>{
-    event.preventDefault();
-    hidden_elements.forEach((element)=>{
-      element.classList.toggle("hidden");
+      event.preventDefault();
+      hidden_elements.forEach((element)=>{
+        element.classList.toggle("hidden");
+      });
     });
-  });
   }
 </script>

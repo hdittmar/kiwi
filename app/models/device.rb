@@ -23,11 +23,13 @@ class Device < ApplicationRecord
     todays_frequency = Report.where(timestamp: date.all_day).group(:device_id).count
     last_weeks_frequencies = Report.where(timestamp: (date-7.days).all_day).group(:device_id).count
     top_ten = todays_frequency.sort_by {|id, frequency| -frequency}[0..9]
-    lowest_frequency = top_ten[-1][1]
-    #now make sure to also get all the devices that also have the same frequency as the lowest in the top 10
-    all_lowest_frequency_devices = todays_frequency.select {|key,value| value == lowest_frequency}
-    all_lowest_frequency_devices.each {|key,value| top_ten << [key,value] unless top_ten.include?([key,value])}
-    create_result_hash(top_ten, last_weeks_frequencies)
+    unless top_ten.empty?
+      lowest_frequency = top_ten[-1][1]
+      #now make sure to also get all the devices that also have the same frequency as the lowest in the top 10
+      all_lowest_frequency_devices = todays_frequency.select {|key,value| value == lowest_frequency}
+      all_lowest_frequency_devices.each {|key,value| top_ten << [key,value] unless top_ten.include?([key,value])}
+      create_result_hash(top_ten, last_weeks_frequencies)
+    end
   end
 
   private

@@ -1,21 +1,23 @@
-<div class="container">
-  <h1>Type#show</h1>
-  <p>Find me in app/views/type/show.html.erb</p>
-  <table class="table">
-    <thead>
-      <th>Date</th>
-      <th>Devices</th>
-    </thead>
-    <%  for i in (1..30)  %> 
-    <tr>
-      <td>
-        <% date = @today - i.days %>
-        <%= date.strftime("%d\/%m\/%y") %>
-      </td>
-      <td><%=  @reports.where(timestamp: date.all_day).count %></td>
-    </tr>
-    <% end %>
-  </table>
-
+<div class="container text-center">
+  <h1>Specific Device and Status</h1>
+  <p>Type: <%= @category.capitalize %></p>
+  <p>Status: <%= @status.capitalize %></p>
+  <div class="col-xs-6 col-xs-offset-3">
+    <table class="table">
+      <thead>
+        <th>Date</th>
+        <th>Devices</th>
+      </thead>
+      <%  for i in (1..30)  %> 
+      <tr style="text-align: left;">
+        <td>
+          <% date = @today - i.days %>
+          <%= date.strftime("%d\/%m\/%y") %>
+        </td>
+        <td><%=  @reports.where(timestamp: date.all_day).count %></td>
+      </tr>
+      <% end %>
+    </table>
   <%= link_to("Return",root_path,class:"btn btn-default") %>
+  </div>
 </div>

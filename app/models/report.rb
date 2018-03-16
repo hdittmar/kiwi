@@ -7,10 +7,7 @@ class Report < ApplicationRecord
 
   validates :timestamp, presence: true
   validates :status, inclusion: {in: ["online","offline"]}
-
-  def self.test
-
-  end
+  validates :timestamp, uniqueness: {:scope => [:device_id, :status]}
 
   def self.load_data
     csv_folder = "db/csv/"
