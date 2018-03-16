@@ -5180,4 +5180,3 @@ timestamp,id,type,status
 2017-05-13T23:38:10Z,28fdfb0a,sensor,offline
 2017-05-13T23:48:30Z,b834d10a,gateway,offline
 2017-05-13T23:51:20Z,361f2df5,gateway,online
-2017-05-13T23:58:40Z,9c1060fc,sensor,online

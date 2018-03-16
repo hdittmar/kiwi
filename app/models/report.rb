@@ -8,6 +8,10 @@ class Report < ApplicationRecord
   validates :timestamp, presence: true
   validates :status, inclusion: {in: ["online","offline"]}
 
+  def self.test
+
+  end
+
   def self.load_data
     csv_folder = "db/csv/"
     csv_options = { headers: :first_row, header_converters: :symbol }
